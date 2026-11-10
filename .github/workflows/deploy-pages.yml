@@ -18,6 +18,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Validate JavaScript syntax
+        run: |
+          node --check app-full.js
+          node --check app-discover.js
+          node --check app-parity.js
+          node --check app-backup.js
+          node --check app-reading.js
+          node --check app-home-library.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
