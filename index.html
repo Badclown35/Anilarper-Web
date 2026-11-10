@@ -25,4 +25,5 @@ function exportData(){let blob=new Blob([JSON.stringify(library,null,2)],{type:'
 function importData(){let i=document.createElement('input');i.type='file';i.accept='.json,application/json';i.onchange=async()=>{try{let d=JSON.parse(await i.files[0].text());if(!Array.isArray(d))throw Error();library=d;save();render()}catch(e){alert('That backup file is not valid.')}};i.click()}
 function render(){if(tab==='Home')home();else if(tab==='Discover')discover();else if(tab==='Library')libraryPage();else if(tab==='Read')readPage();else morePage()}
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));document.querySelector('#profile').onclick=profilePage;render();
-</script></body></html>
+</script><script src="app-full.js"></script>
+</body></html>
