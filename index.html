@@ -129,6 +129,32 @@
 @media(max-width:420px){.read-page>.row{align-items:stretch}.read-page>.row .btn{font-size:12px;padding:8px}.read-search{gap:7px}.read-search .btn{min-width:76px;padding:8px 10px}}
 @media(min-width:1000px){.read-page{max-width:1180px}.read-search{margin-top:22px}.read-shelf{margin-top:36px}.read-empty{min-height:210px}.read-item{max-width:980px}}
 
+
+/* Desktop-only product layout: PC/laptop is the target, not mobile. */
+body{min-width:1024px;min-height:100vh}
+.app{width:auto;max-width:none;min-width:0;margin:0 0 0 232px;padding:34px clamp(28px,3vw,58px) 56px}
+.tabs{position:fixed;z-index:20;inset:0 auto 0 0;width:232px;display:flex;align-items:flex-start;justify-content:flex-start;padding:28px 16px;background:linear-gradient(180deg,#101522f7,#090d15f7);border-top:0;border-right:1px solid #9b8cff55;backdrop-filter:blur(18px)}
+.tabwrap{width:100%;display:flex;flex-direction:column;gap:8px}
+.tab{width:100%;display:flex;align-items:center;justify-content:flex-start;gap:13px;min-height:48px;padding:11px 14px;text-align:left;font-size:14px;border-radius:13px}
+.tab span{width:22px;display:inline-grid;place-items:center;font-size:20px}
+.tab.active{background:linear-gradient(100deg,#9b8cff25,#ff8fb812);color:#c3baff}
+#page{width:100%;max-width:1600px;margin:0 auto}
+.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.discover-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+#libgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+#libgrid>.card{display:flex!important;flex-direction:column!important;margin:0!important;padding:0!important}
+#libgrid>.card>img{width:100%!important;max-height:390px;aspect-ratio:2/3;object-fit:cover;border-radius:0!important}
+#libgrid>.card>div{width:100%;padding:14px}
+.moregrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.moretile{min-height:132px;padding:20px}
+.read-page{max-width:1180px}
+.read-search{margin-top:22px}
+.read-shelf{margin-top:36px}
+.read-empty{min-height:210px}
+.read-item{max-width:980px}
+@media(min-width:1450px){.grid,.discover-grid,#libgrid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(min-width:1800px){.grid,.discover-grid,#libgrid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+
 </style></head><body><main class="app"><header class="top"><div class="brand"><small>ANILARPER</small><h1>Your anime universe.</h1></div><button class="avatar" id="profile" aria-label="Profile">◉</button></header><div id="page"></div></main><nav class="tabs"><div class="tabwrap"><button class="tab active" data-tab="Home"><span>⌂</span>Home</button><button class="tab" data-tab="Discover"><span>⌕</span>Discover</button><button class="tab" data-tab="Library"><span>▣</span>Library</button><button class="tab" data-tab="Read"><span>▤</span>Read</button><button class="tab" data-tab="More"><span>•••</span>More</button></div></nav>
 <script>
 const API='https://graphql.anilist.co',MEDIA='https://anilarper-media-worker.dywone659.workers.dev';let tab='Home',library=JSON.parse(localStorage.getItem('anilarper-library')||'[]'),results=[],query='',community=[],selectedVideo=null;
