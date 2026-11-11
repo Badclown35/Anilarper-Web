@@ -42,3 +42,9 @@ Open index.html in a modern browser or serve this folder with a static HTTP serv
 ## Content
 
 Only share media you own or have permission to distribute. Anilarper Web is a catalog and player interface; it does not provide anime downloads.
+
+---
+
+## AI-assisted development
+
+> **Vibe coded with AI.** This project was built and iterated on with AI assistance, guided by human ideas, prompts, testing, and decisions. AI-generated contributions may contain mistakes; review and verify changes before use.
