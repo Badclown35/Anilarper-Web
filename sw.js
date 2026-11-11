@@ -1,1 +1,27 @@
-const CACHE='anilarper-shell-v1';const CORE=['./','./index.html','./app-full.js','./app-discover.js','./manifest.webmanifest','./icon.svg'];self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE))));self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==location.origin)return;e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).then(r=>{if(r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy))}return r})))});
+const CACHE='anilarper-shell-v2';
+const CORE=['./','./index.html','./app-full.js','./app-discover.js','./app-parity.js','./app-backup.js','./app-reading.js','./app-home-library.js','./app-franchise.js','./app-mal-details.js','./manifest.webmanifest','./icon.svg'];
+self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(CORE);await self.skipWaiting()})()));
+self.addEventListener('activate',event=>event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)));await self.clients.claim()})()));
+self.addEventListener('fetch',event=>{
+  const request=event.request,url=new URL(request.url);
+  if(request.method!=='GET'||url.origin!==self.location.origin)return;
+  const isAppShell=request.mode==='navigate'||/\\.(?:html|js|css|webmanifest)$/.test(url.pathname);
+  if(isAppShell){
+    event.respondWith((async()=>{
+      try{
+        const fresh=await fetch(request,{cache:'no-store'});
+        if(fresh.ok){const cache=await caches.open(CACHE);cache.put(request,fresh.clone())}
+        return fresh;
+      }catch(error){
+        const cached=await caches.match(request);
+        if(cached)return cached;
+        throw error;
+      }
+    })());
+    return;
+  }
+  event.respondWith(caches.match(request).then(cached=>cached||fetch(request).then(response=>{
+    if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(request,copy))}
+    return response;
+  })));
+});
