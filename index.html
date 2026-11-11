@@ -53,6 +53,19 @@
 @media(min-width:1400px){.discover-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media(max-width:420px){.discover-filters{grid-template-columns:1fr}.discover-meta{align-items:flex-start;flex-direction:column}}
 
+
+/* Web-native shell layout: stable content widths and fluid grids. */
+#page{min-width:0;width:100%;}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+.card{min-width:0;overflow:hidden;}
+.cardbody,.card h3,.sub,.notice{overflow-wrap:anywhere;}
+.poster{aspect-ratio:2/3;}
+.moregrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.moretile{display:flex;flex-direction:column;align-items:flex-start;gap:8px;text-align:left;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:16px;color:var(--text);min-width:0;}
+.moretile small{color:var(--muted);}
+@media(min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));}.moregrid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr));}.moregrid{grid-template-columns:repeat(4,minmax(0,1fr));}}
+@media(min-width:1280px){.grid{grid-template-columns:repeat(5,minmax(0,1fr));}}
 </style></head><body><main class="app"><header class="top"><div class="brand"><small>ANILARPER</small><h1>Your anime universe.</h1></div><button class="avatar" id="profile" aria-label="Profile">◉</button></header><div id="page"></div></main><nav class="tabs"><div class="tabwrap"><button class="tab active" data-tab="Home"><span>⌂</span>Home</button><button class="tab" data-tab="Discover"><span>⌕</span>Discover</button><button class="tab" data-tab="Library"><span>▣</span>Library</button><button class="tab" data-tab="Read"><span>▤</span>Read</button><button class="tab" data-tab="More"><span>•••</span>More</button></div></nav>
 <script>
 const API='https://graphql.anilist.co',MEDIA='https://anilarper-media-worker.dywone659.workers.dev';let tab='Home',library=JSON.parse(localStorage.getItem('anilarper-library')||'[]'),results=[],query='',community=[],selectedVideo=null;
@@ -86,22 +99,6 @@ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setTab(b.dataset.tab)
 <script src="app-home-library.js"></script>
 <script src="app-franchise.js"></script>
 <script src="app-mal-details.js"></script>
-<script>
-/* ANILARPER_FINAL_BOOTSTRAP: initialize only after all feature modules have loaded. */
-function render(){
-  if(tab==='Home') home();
-  else if(tab==='Discover') discover();
-  else if(tab==='Library') libraryPage();
-  else if(tab==='Read') readingPage();
-  else morePage();
-}
-function setTab(t){
-  tab=t;
-  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
-  render();
-}
-document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>setTab(button.dataset.tab));
-document.querySelector('#profile').onclick=profilePage;
-render();
-</script>
+<script src="app-shell.js"></script>
+
 </body></html>
