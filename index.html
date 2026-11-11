@@ -86,4 +86,19 @@ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setTab(b.dataset.tab)
 <script src="app-home-library.js"></script>
 <script src="app-franchise.js"></script>
 <script src="app-mal-details.js"></script>
+<script>
+/* ANILARPER_FINAL_BOOTSTRAP: initialize only after all feature modules have loaded. */
+function render(){
+  if(tab==='Home') home();
+  else if(tab==='Discover') discover();
+  else if(tab==='Library') libraryPage();
+  else if(tab==='Read') readingPage();
+  else morePage();
+}
+document.querySelectorAll('.tab').forEach(button=>{
+  button.onclick=()=>setTab(button.dataset.tab);
+});
+document.querySelector('#profile').onclick=profilePage;
+render();
+</script>
 </body></html>
