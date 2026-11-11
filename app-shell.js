@@ -12,6 +12,7 @@
   function setTab(next){
     if(!allowed.has(next))return;
     active=next;window.tab=next;
+    const brandTitle=document.querySelector('.brand h1');if(brandTitle)brandTitle.textContent=next==='Read'?'Reading Shelf':'Your anime universe.';
     nav.forEach(b=>{const selected=b.dataset.tab===next;b.classList.toggle('active',selected);b.setAttribute('aria-current',selected?'page':'false');b.setAttribute('aria-pressed',String(selected));});
     if(location.hash!=='#'+next)history.replaceState(null,'','#'+next);
     render();
