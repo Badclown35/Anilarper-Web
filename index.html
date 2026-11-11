@@ -95,9 +95,12 @@ function render(){
   else if(tab==='Read') readingPage();
   else morePage();
 }
-document.querySelectorAll('.tab').forEach(button=>{
-  button.onclick=()=>setTab(button.dataset.tab);
-});
+function setTab(t){
+  tab=t;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  render();
+}
+document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>setTab(button.dataset.tab));
 document.querySelector('#profile').onclick=profilePage;
 render();
 </script>
