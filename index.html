@@ -66,6 +66,46 @@
 @media(min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));}.moregrid{grid-template-columns:repeat(3,minmax(0,1fr));}}
 @media(min-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr));}.moregrid{grid-template-columns:repeat(4,minmax(0,1fr));}}
 @media(min-width:1280px){.grid{grid-template-columns:repeat(5,minmax(0,1fr));}}
+
+/* Desktop-first workspace: a real side rail and wide content canvas. */
+@media (min-width:1000px){
+  body{min-height:100vh}
+  .tabs{position:fixed;z-index:20;inset:0 auto 0 0;width:232px;display:flex;align-items:flex-start;justify-content:flex-start;padding:28px 16px;background:linear-gradient(180deg,#101522f7,#090d15f7);border-top:0;border-right:1px solid #9b8cff55;backdrop-filter:blur(18px)}
+  .tabwrap{width:100%;display:flex;flex-direction:column;gap:8px}
+  .tab{width:100%;display:flex;align-items:center;justify-content:flex-start;gap:13px;min-height:48px;padding:11px 14px;text-align:left;font-size:14px;border-radius:13px}
+  .tab span{width:22px;display:inline-grid;place-items:center;font-size:20px}
+  .tab.active{background:linear-gradient(100deg,#9b8cff25,#ff8fb812);color:#c3baff}
+  .app{width:auto;max-width:1760px;margin:0 auto 0 232px;padding:34px clamp(28px,3vw,58px) 56px}
+  .top{margin:0 0 32px;padding-bottom:22px;border-bottom:1px solid #2a394b}
+  .brand h1{font-size:30px}
+  #page{width:100%;max-width:1600px;margin:0 auto}
+  .section{margin:34px 0}
+  .heading h2{font-size:20px}
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+  .card{border-radius:16px}
+  .cardbody{padding:14px}
+  .card h3{font-size:14px}
+  .poster{max-height:390px}
+  .searchbar{max-width:760px}
+  .discover-tools{max-width:none}
+  .discover-filters{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .discover-meta{max-width:none}
+  .discover-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  #libgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+  #libgrid>.card{display:flex!important;flex-direction:column!important;margin:0!important;padding:0!important}
+  #libgrid>.card>img{width:100%!important;max-height:390px;aspect-ratio:2/3;object-fit:cover;border-radius:0!important}
+  #libgrid>.card>div{width:100%;padding:14px}
+  .moregrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  .moretile{min-height:132px;padding:20px}
+  .video{max-height:78vh}
+}
+@media (min-width:1450px){.grid,.discover-grid,#libgrid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media (min-width:1000px) and (max-width:1199px){
+  .tabs{width:204px;padding-left:12px;padding-right:12px}
+  .app{margin-left:204px;padding-left:24px;padding-right:24px}
+  .grid,.discover-grid,#libgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
 </style></head><body><main class="app"><header class="top"><div class="brand"><small>ANILARPER</small><h1>Your anime universe.</h1></div><button class="avatar" id="profile" aria-label="Profile">◉</button></header><div id="page"></div></main><nav class="tabs"><div class="tabwrap"><button class="tab active" data-tab="Home"><span>⌂</span>Home</button><button class="tab" data-tab="Discover"><span>⌕</span>Discover</button><button class="tab" data-tab="Library"><span>▣</span>Library</button><button class="tab" data-tab="Read"><span>▤</span>Read</button><button class="tab" data-tab="More"><span>•••</span>More</button></div></nav>
 <script>
 const API='https://graphql.anilist.co',MEDIA='https://anilarper-media-worker.dywone659.workers.dev';let tab='Home',library=JSON.parse(localStorage.getItem('anilarper-library')||'[]'),results=[],query='',community=[],selectedVideo=null;
