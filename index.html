@@ -38,6 +38,21 @@
   .btn:hover{border-color:var(--violet)}
 }
 
+
+/* Discover page layout and shared responsive polish. */
+.discover-tools{display:grid;gap:12px;margin:12px 0 18px}
+.discover-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:0}
+.discover-filters select,.discover-filters .field{width:100%;min-width:0;min-height:44px}
+.discover-filters .year-filter{width:100%}
+.discover-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:8px 0 14px}
+.discover-pagination{justify-content:center;gap:12px}
+.discover-grid{align-items:start}
+.synopsis{line-height:1.8;max-width:900px}
+@media(min-width:700px){.discover-filters{grid-template-columns:repeat(3,minmax(0,1fr))}.discover-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1000px){.discover-tools{max-width:1120px}.discover-filters{grid-template-columns:repeat(4,minmax(0,1fr))}.discover-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.discover-meta{max-width:1120px}}
+@media(min-width:1400px){.discover-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:420px){.discover-filters{grid-template-columns:1fr}.discover-meta{align-items:flex-start;flex-direction:column}}
+
 </style></head><body><main class="app"><header class="top"><div class="brand"><small>ANILARPER</small><h1>Your anime universe.</h1></div><button class="avatar" id="profile" aria-label="Profile">◉</button></header><div id="page"></div></main><nav class="tabs"><div class="tabwrap"><button class="tab active" data-tab="Home"><span>⌂</span>Home</button><button class="tab" data-tab="Discover"><span>⌕</span>Discover</button><button class="tab" data-tab="Library"><span>▣</span>Library</button><button class="tab" data-tab="Read"><span>▤</span>Read</button><button class="tab" data-tab="More"><span>•••</span>More</button></div></nav>
 <script>
 const API='https://graphql.anilist.co',MEDIA='https://anilarper-media-worker.dywone659.workers.dev';let tab='Home',library=JSON.parse(localStorage.getItem('anilarper-library')||'[]'),results=[],query='',community=[],selectedVideo=null;
