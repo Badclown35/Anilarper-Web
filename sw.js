@@ -5,7 +5,7 @@ self.addEventListener('activate',event=>event.waitUntil((async()=>{const keys=aw
 self.addEventListener('fetch',event=>{
   const request=event.request,url=new URL(request.url);
   if(request.method!=='GET'||url.origin!==self.location.origin)return;
-  const isAppShell=request.mode==='navigate'||/\\.(?:html|js|css|webmanifest)$/.test(url.pathname);
+  const isAppShell=request.mode==='navigate'||/\.(?:html|js|css|webmanifest)$/.test(url.pathname);
   if(isAppShell){
     event.respondWith((async()=>{
       try{
